@@ -2,6 +2,7 @@
 
 # ide preferences
 /.idea
+ember-cli-data-export.iml
 
 # compiled output
 /dist/
