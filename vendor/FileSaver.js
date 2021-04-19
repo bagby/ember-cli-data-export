@@ -123,7 +123,7 @@
       }, 0);
     }
   } // Use msSaveOrOpenBlob as a second approach
-  : 'msSaveOrOpenBlob' in navigator ? function saveAs(blob, name, opts) {
+  : _global.navigator && 'msSaveOrOpenBlob' in navigator ? function saveAs(blob, name, opts) {
     name = name || blob.name || 'download';
 
     if (typeof blob === 'string') {
@@ -155,7 +155,7 @@
 
     var isSafari = /constructor/i.test(_global.HTMLElement) || _global.safari;
 
-    var isChromeIOS = /CriOS\/[\d]+/.test(navigator.userAgent);
+    var isChromeIOS = _global.navigator && /CriOS\/[\d]+/.test(navigator.userAgent);
 
     if ((isChromeIOS || force && isSafari || isMacOSWebView) && typeof FileReader !== 'undefined') {
       // Safari doesn't allow downloading of blob URLs
