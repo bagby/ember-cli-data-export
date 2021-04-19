@@ -88,7 +88,7 @@
   // https://www.whatismybrowser.com/guides/the-latest-user-agent/macos
 
 
-  var isMacOSWebView = /Macintosh/.test(navigator.userAgent) && /AppleWebKit/.test(navigator.userAgent) && !/Safari/.test(navigator.userAgent);
+  var isMacOSWebView = /Macintosh/.test(navigator?.userAgent) && /AppleWebKit/.test(navigator?.userAgent) && !/Safari/.test(navigator?.userAgent);
   var saveAs = _global.saveAs || ( // probably in some web worker
   typeof window !== 'object' || window !== _global ? function saveAs() {}
   /* noop */
@@ -138,7 +138,7 @@
         });
       }
     } else {
-      navigator.msSaveOrOpenBlob(bom(blob, opts), name);
+      navigator?.msSaveOrOpenBlob(bom(blob, opts), name);
     }
   } // Fallback to using FileReader and a popup
   : function saveAs(blob, name, opts, popup) {
@@ -155,7 +155,7 @@
 
     var isSafari = /constructor/i.test(_global.HTMLElement) || _global.safari;
 
-    var isChromeIOS = /CriOS\/[\d]+/.test(navigator.userAgent);
+    var isChromeIOS = /CriOS\/[\d]+/.test(navigator?.userAgent);
 
     if ((isChromeIOS || force && isSafari || isMacOSWebView) && typeof FileReader !== 'undefined') {
       // Safari doesn't allow downloading of blob URLs
