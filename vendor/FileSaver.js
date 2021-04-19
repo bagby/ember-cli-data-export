@@ -25,17 +25,6 @@
   // The one and only way of getting global scope in all environments
   // https://stackoverflow.com/q/3277182/1008999
   var _global = typeof window === 'object' && window.window === window ? window : typeof self === 'object' && self.self === self ? self : typeof global === 'object' && global.global === global ? global : void 0;
-
-  const jsdom = require("jsdom");
-  const { JSDOM } = jsdom;
-  
-  const { document } = new JSDOM(``, {
-    url: "http://localhost",
-  }).window;
-  _global.document = document;
-  _global.window = document.defaultView;
-  _global.HTMLElement = window.HTMLElement;
-  _global.HTMLAnchorElement = window.HTMLAnchorElement;
   
     function bom(blob, opts) {
     if (typeof opts === 'undefined') opts = {
@@ -104,7 +93,7 @@
   typeof window !== 'object' || window !== _global ? function saveAs() {}
   /* noop */
   // Use download attribute first if possible (#193 Lumia mobile) unless this is a macOS WebView
-  : 'download' in _global.HTMLAnchorElement.prototype && !isMacOSWebView ? function saveAs(blob, name, opts) {
+  : _global.HTMLAnchorElement && 'download' in _global.HTMLAnchorElement.prototype && !isMacOSWebView ? function saveAs(blob, name, opts) {
     var URL = _global.URL || _global.webkitURL;
     var a = document.createElement('a');
     name = name || blob.name || 'download';
